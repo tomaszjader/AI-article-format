@@ -64,3 +64,9 @@ response = client.chat.completions.create(
   }
 )
 print(response.choices[0].message.content)
+
+article_html_name = "artykul.html"
+article_html = response.choices[0].message.content
+
+with open(article_html_name, "w") as plik:
+    plik.write(article_html)
