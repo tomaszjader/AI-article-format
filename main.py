@@ -40,7 +40,20 @@ response = client.chat.completions.create(
       "content": [
         {
           "type": "text",
-          "text": "You will receive a text that you need to format by adding appropriate HTML tags to the corresponding paragraphs. Only format the content for the body section of this text and no body tag."
+          "text": """
+Prompt:
+You will receive a text that you need to format into structured HTML. Follow these steps for formatting:
+
+Extract the title from the text and wrap it in an <h1> tag at the top of the HTML.
+Divide the remaining text into sections, where each paragraph group begins with a descriptive <h2> tag summarizing its content. The <h2> headers should be generated based on the topic of the following paragraph(s).
+Wrap each paragraph in a <p> tag.
+After each paragraph, insert an HTML <figure> element that contains:
+An <img> tag with the following attributes:
+src="image_placeholder.jpg".
+alt attribute that describes how to generate the corresponding image based on the content of the paragraph (this should be a prompt for an image generation system, like DALL·E).
+A <figcaption> tag that contains a brief description of what the image is depicting in the context of the paragraph.
+Return only the formatted HTML code, with no additional comments or formatting like "```html". Ensure the HTML is valid and ready for use, including using the <figure> element for images, with the appropriate alt descriptions and captions.
+"""
         }
       ]
     },
